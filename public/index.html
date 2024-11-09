@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Session Test</title>
+        <script src="/socket.io/socket.io.js"></script>
+    </head>
+    <body>
+        <div id="content"></div>
+        <script>
+            const contentDiv = document.getElementById('content');
+            var sessionId;
+            var userId;
+            function loadContent(page, sId, uId) {
+                fetch(`${page}.html`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network reponse was not ok');
+                    }
+
+                    return response.text();
+                })
+                .then(html => {
+                    contentDiv.innerHTML = html;
+                    sessionId = sId;
+                    userId = uId;
+                    // Create a temporary DOM element to execute the scripts
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = html;
+
+                    // Find all script tags in the newly loaded content and execute them
+                    const scripts = tempDiv.getElementsByTagName('script');
+                    for (let script of scripts) {
+                        const newScript = document.createElement('script');
+                        newScript.text = script.innerHTML; // Set the script content
+                        document.body.appendChild(newScript); // Append to body to execute
+                    }
+                })
+                .catch(error => {
+                    contentDiv.innerHTML = '<h1>Error loading Content</h1>';
+                    console.error('Error loading contnet:', error);
+                });
+            }
+
+            function getUsernames() {
+                console.log(`getting users in session ${sessionId}`);
+                socket.emit('getUsers', sessionId);
+            }
+
+            function setPool(pool) {
+                socket.emit('setPool', pool, sessionId);
+            }
+
+            function getPool() {
+                socket.emit('getPool', sessionId);
+            }
+
+            function getPacks() {
+                socket.emit('getPacks', sessionId);
+            }
+
+            function getPack(userId) {
+                socket.emit('getPack', sessionId, userId);
+            }
+
+            function startRound() {
+                socket.emit('startRound', sessionId);
+            }
+
+            function makePick(userId, pick) {
+                socket.emit('makePick', sessionId, userId, pick);
+            }
+
+            loadContent('home', "", "");
+        </script>
+    </body>
+</html>

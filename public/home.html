@@ -1,0 +1,26 @@
+<h1>Join a Session</h1>
+<input id="userId" placeholder="Enter UserName"/>
+<input id="sessionId" placeholder="Enter Session ID"/>
+<button id="joinBtn">Join Session</button>
+<div id="message"></div>
+
+<script>
+    const socket = io();
+
+    document.getElementById('joinBtn').onclick = () => {
+        const userId = document.getElementById('userId').value;
+        const sessionId = document.getElementById('sessionId').value;
+        console.log(sessionId);
+        socket.emit('joinSession', sessionId, userId);
+        document.getElementById('message').innerText = `Joining session ${sessionId}...`;
+    };
+
+    socket.on('userJoined', (userId, sessionId) => {
+        document.getElementById('message').innerText = `User ${userId} has joined the session ${sessionId}`;
+        loadContent('lobby', sessionId, userId);
+    });
+
+    socket.on('joinFailed', (error) => {
+        document.getElementById('message').innerText = `Uanble to Join Session : ${error}`;
+    });
+</script>

@@ -1,0 +1,25 @@
+{
+  "name": "PokemonDrafter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node -r dotenv/config server.js",
+    "start:dev": "cross-env NODE_ENV=development && npm run start",
+    "start:prod": "cross-env NODE_ENV=production && npm run start",
+    "env:dev": "cp .env.development .env && npm run start:dev",
+    "env:prod": "cp .env.production .env && npm run start:prod"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "node-fetch": "^3.3.2",
+    "socket.io": "^4.8.1"
+  }
+}

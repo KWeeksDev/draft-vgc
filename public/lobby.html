@@ -1,0 +1,302 @@
+<html>
+    <head>
+        <title>Pokemon Drafter</title>
+        <link rel="stylesheet" href="lobby.css">
+    </head>
+    <body>
+        <h1 id=sessionName></h1>
+        <h2 id="sessionStatus">Waiting for Players</h2>
+        <img id="sprite" src="" style="position:absolute;left:282px;top:360px;width:90px;height:90px;"/> 
+        <button id="start-button">Start the Draft</button>
+        <button id="selectPokemon">Select Pokemon</button>
+        <button id="generateTeam">Generate Team</button>
+        <div class="container">
+            <object type="image/svg+xml" data="resources/PokeCenter.svg" id="pokeCenter">
+                Your Browser doesn't support SVGs
+            </object>
+            <div id="stats"></div>
+        </div>
+        <div class="selection-container">
+            <div id="teammate1" class="selection-wrapper">
+                <img id="pick1Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                <img id="pick1Icon" class="pick icon" src=""/>
+            </div>
+            <div id="teammate2" class="selection-wrapper">
+                <img id="pick2Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                <img id="pick2Icon" class="pick icon" src=""/>
+            </div>
+            <div id="teammate3" class="selection-wrapper">
+                <img id="pick3Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                <img id="pick3Icon" class="pick icon" src=""/>
+            </div>
+            <div id="teammate4" class="selection-wrapper">
+                <img id="pick4Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                <img id="pick4Icon" class="pick icon" src=""/>
+            </div>
+            <div id="teammate5" class="selection-wrapper">
+                <img id="pick5Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                <img id="pick5Icon" class="pick icon" src=""/>
+            </div>
+            <div id="teammate6" class="selection-wrapper">
+                <img id="pick6Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                <img id="pick6Icon" class="pick icon" src=""/>
+            </div>
+            <div id="teammate7" class="selection-wrapper">
+                <img id="pick7Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                <img id="pick7Icon" class="pick icon" src=""/>
+            </div>
+            <div id="teammate8" class="selection-wrapper">
+                <img id="pick8Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                <img id="pick8Icon" class="pick icon" src=""/>
+            </div>
+            <div id="teammate9" class="selection-wrapper">
+                <img id="pick9Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                <img id="pick9Icon" class="pick icon" src=""/>
+            </div>
+        </div>
+        <div id="teamStats"></div>
+        <script >
+            // Keep a reference to the svg file
+            let svgDoc = document.getElementById('pokeCenter').contentDocument;
+            // Disable the start button from start
+            const startButton = document.getElementById('start-button');
+            const generateTeamButton = document.getElementById('generateTeam');
+            //startButton.disabled = true;
+            generateTeamButton.disabled = true;
+            let poolCopy = {};
+            let currentPack = {};
+            let currentPick = {};
+            let totalPicks = 1;
+            let teamSelected = 0;
+            let loadedJson = false;
+            // Update the session name so it can be shared
+            document.getElementById('sessionName').innerText = "Draft Group: " + sessionId;
+            // Setup team buttons
+            for (let i = 1; i < 10; i++ ) {
+                // Toggle Selected           
+                document.getElementById(`teammate${i}`).addEventListener('click', function() {
+                    let classList = document.getElementById(`teammate${i}`).classList;
+                    if (classList.contains('selected')) {
+                        classList.remove('selected');
+                        teamSelected--;
+                    } else {
+                        if (teamSelected < 6) {
+                            classList.add('selected');
+                            teamSelected++;
+                        }
+                    }
+                    generateTeamButton.disabled = teamSelected != 6;
+                });
+
+                document.getElementById(`teammate${i}`).addEventListener('mouseover', function() {    
+                    const pkmnName = document.getElementById(`pick${i}Icon`).alt;
+                    const pkmn = poolCopy.find((pkmn) => pkmn.name == pkmnName);
+                    if (pkmn) {
+                        document.getElementById('teamStats').innerHTML = pkmn.paste.replace(/\n/g, '<br>');
+                    }
+                });
+            }
+            // Load the SVG
+            document.getElementById('pokeCenter').addEventListener('load', function() {
+                svgDoc = this.contentDocument;
+                updatePokemonVisuals();
+                for (let i = 0; i < 4; i++) {
+                    svgDoc.querySelector(`#nametag_${i+1}`).textContent = "";
+                    svgDoc.querySelector(`#player_${i+1}`).style.display = "none";
+                }
+                console.log("getting user names");
+                getUsernames();
+                updateRoundInfo("","");
+                
+                // Setup balls
+                for (let i = 1; i < 4; i++) {
+                    svgDoc.querySelector(`#ball_1_${i}`).addEventListener('click', () => {
+                        currentPick = `${currentPack[i-1].name}`;
+                        const apiUrl = 'https://pokeapi.co/api/v2/pokemon/' + currentPick;
+                        fetch(apiUrl)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok ' + response.statusText);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {                           
+                            updatePokemonVisuals(data)
+                        })
+                        .catch(error => {
+                            document.getElementById('sessionStatus').innerText = 'Error: ' + error.message;
+                        });
+                    });
+                }
+            });
+
+            socket.on('userNames', (ids) => {
+                var idx = ids.indexOf(userId);
+                console.log(idx);
+                if (idx == 0) {
+                    if (!loadedJson) {
+                        loadJson('pool_test');
+                        loadedJson = true;
+                    }
+                    //startButton.disabled = ids.find((e) => e == "") != undefined;
+                }
+                for (let i = 0; i < 4; i++) {
+                    if (ids[idx]) {                            
+                        svgDoc.querySelector(`#nametag_${i+1}`).textContent = ids[idx];
+                        svgDoc.querySelector(`#player_${i+1}`).style.display = "inline";
+                    }
+                    else {
+                        svgDoc.querySelector(`#nametag_${i+1}`).textContent = "";
+                        svgDoc.querySelector(`#player_${i+1}`).style.display = "none";
+                    }
+                    if (idx >= 3) {
+                        idx = 0;
+                    }
+                    else {
+                        idx++;
+                    }
+                }
+            })
+
+            socket.on('pokemonPool', (pool) => {
+                console.log("pokemonPool");
+                poolCopy = pool;
+            })
+
+            socket.on('pokemonPack', (pack) => {
+                console.log("pokemonPack");
+                console.log(pack);
+                currentPack = pack;
+            })
+
+            socket.on('roundUpdated', (rnd, pck) => {
+                updateRoundInfo(rnd,pck);
+            })
+            socket.on('nextPack', (pack) => {
+                console.log("nextPack");
+                currentPack = pack;
+                updatePokeballs();
+            })
+
+            socket.on('waitingForPicks', () => {
+                document.getElementById("sessionStatus").innerText = "Waiting for Players to make Selection!";
+            })
+
+            socket.on('readyForNextPack', () => {
+                console.log("Rady for next pack");
+                document.getElementById("sessionStatus").innerText = "Select a Pokemon!";
+                getPack(userId);
+            })
+
+            socket.on('draftComplete', () => {
+                document.getElementById("Select 6 Pokemon to Make your Team!").innerText = "Select a Pokemon!";
+                startButton.disabled = true;
+                selectPokemon.disabled = true;
+            })
+
+            // Starts the rounds off. 
+            startButton.addEventListener('click', () => {
+                startRound();
+                startButton.disabled = true;
+            });
+
+            // Selects a pokemon. Once everyone has picked, auto advances.
+            selectPokemon.addEventListener('click', () => {                
+                document.getElementById(`pick${totalPicks}Icon`).src = document.getElementById('sprite').src;
+                document.getElementById(`pick${totalPicks}Icon`).alt = document.getElementById('sprite').alt;
+                updatePokemonVisuals();
+                totalPicks++;
+                makePick(userId, currentPick);
+            });
+
+            // Create a pokePaste from the six selected team pokemon
+            generateTeamButton.addEventListener('click', () => {
+                console.log("generate button");
+                const team = [];
+                for (let i = 1; i < 10; i++) {
+                    if (document.getElementById(`teammate${i}`).classList.contains('selected')) { team.push(document.getElementById(`pick${i}Icon`).alt)}
+                }
+                let teamPaste = {paste:"", title:"", author:"", notes:""};
+                for (let p = 0; p < team.length; p++) {
+                    const pkmn = poolCopy.find(e => e.name == team[p]);
+                    if (pkmn) {
+                        teamPaste.paste += pkmn.paste;
+                        teamPaste.paste += "\r\n\r\n";
+                    }
+                }
+                console.log(teamPaste);
+                const apiUrl = `http://3.137.192.177:3000/create`;
+                fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(teamPaste),
+                }) 
+                .then(response => {
+                    console.log("response");
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    const jsonResp = response.json();
+                    console.log(jsonResp);
+                    return jsonResp;
+                })
+                .then(data => {
+                    window.open(data.url, '__blank');
+                })
+                .catch(error => {
+                    document.getElementById('sessionStatus').innerText = 'Error: ' + error.message;
+                });
+            });
+
+            function updatePokeballs() {
+                svgDoc.querySelector(`#ball_1_1`).style.display = currentPack[0] != "" ? "inline" : "none";
+                svgDoc.querySelector(`#ball_1_2`).style.display = currentPack[1] != "" ? "inline" : "none";
+                svgDoc.querySelector(`#ball_1_3`).style.display = currentPack[2] != "" ? "inline" : "none";
+            }
+
+            function updatePokemonVisuals(data) {
+                if (data) {
+                    const pkmn = poolCopy.find((pkmn) => pkmn.name == data.name);
+                    if (pkmn) {
+                        document.getElementById('stats').innerHTML = pkmn.paste.replace(/\n/g, '<br>');
+                    }
+
+                    svgDoc.querySelector(`#pkmnSpriteBorder`).style.display = "inline";
+                    document.getElementById('sprite').style.display = "inline";
+                    document.getElementById('sprite').src = data.sprites.front_default;
+                    document.getElementById('sprite').alt = data.name;
+                } else {
+                    svgDoc.querySelector(`#pkmnSpriteBorder`).style.display = "none";
+                    document.getElementById('sprite').style.display = "none";
+                    document.getElementById('stats').innerHTML = "";
+                }
+            }
+
+            function updateRoundInfo(round, pick) {
+                svgDoc.querySelector(`#roundNumber`).textContent = round;
+                svgDoc.querySelector(`#pickNumber`).textContent = pick;
+            }
+
+            function loadJson(pool) {
+                fetch(`${pool}.json`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network reponse was not ok');
+                    }           
+                    return response.text();
+                })
+                .then(jsn => {
+                    setPool(JSON.parse(jsn));
+                })
+                .catch(error => {
+                    contentDiv.innerHTML = '<h1>Error loading Content</h1>';
+                    console.error('Error loading contnet:', error);
+                });  
+            }
+
+            
+        </script>      
+    </body>
+</html>
