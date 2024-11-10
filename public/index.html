@@ -70,6 +70,10 @@
                 socket.emit('makePick', sessionId, userId, pick);
             }
 
+            function generatePasteUrl(paste) {
+                socket.emit('generatePasteUrl', paste);
+            }
+
             loadContent('home', "", "");
         </script>
     </body>

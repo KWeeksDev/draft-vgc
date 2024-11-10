@@ -92,7 +92,7 @@
                     const pkmnName = document.getElementById(`pick${i}Icon`).alt;
                     const pkmn = poolCopy.find((pkmn) => pkmn.name == pkmnName);
                     if (pkmn) {
-                        document.getElementById('teamStats').innerHTML = pkmn.paste.replace(/\n/g, '<br>');
+                        document.getElementById('teamStats').innerHTML = getFormattedPokemonStats(pkmn, true);
                     }
                 });
             }
@@ -111,7 +111,9 @@
                 // Setup balls
                 for (let i = 1; i < 4; i++) {
                     svgDoc.querySelector(`#ball_1_${i}`).addEventListener('click', () => {
-                        currentPick = `${currentPack[i-1].name}`;
+                        let pickStr = `${currentPack[i-1].name}`;
+                        console.log(pickStr);
+                        currentPick = pickStr.toLowerCase();
                         const apiUrl = 'https://pokeapi.co/api/v2/pokemon/' + currentPick;
                         fetch(apiUrl)
                         .then(response => {
@@ -194,6 +196,10 @@
                 selectPokemon.disabled = true;
             })
 
+            socket.on('pasteUrl', (url) => {
+                window.open(url, '__blank');
+            })
+
             // Starts the rounds off. 
             startButton.addEventListener('click', () => {
                 startRound();
@@ -216,38 +222,44 @@
                 for (let i = 1; i < 10; i++) {
                     if (document.getElementById(`teammate${i}`).classList.contains('selected')) { team.push(document.getElementById(`pick${i}Icon`).alt)}
                 }
-                let teamPaste = {paste:"", title:"", author:"", notes:""};
+                console.log(team);
+                let teamPaste = "";
                 for (let p = 0; p < team.length; p++) {
-                    const pkmn = poolCopy.find(e => e.name == team[p]);
+                    const pkmn = poolCopy.find(e => e.name.toLowerCase() == team[p]);
                     if (pkmn) {
-                        teamPaste.paste += pkmn.paste;
-                        teamPaste.paste += "\r\n\r\n";
-                    }
+                        if (teamPaste == "") {
+                            teamPaste = getFormattedPokemonStats(pkmn, false);
+                        } else {
+                            teamPaste += getFormattedPokemonStats(pkmn, false);
+                        }
+                        teamPaste += "\r\n\r\n";
+                    } else { console.log("pkmon not found");}
                 }
                 console.log(teamPaste);
-                const apiUrl = `http://3.137.192.177:3000/create`;
-                fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(teamPaste),
-                }) 
-                .then(response => {
-                    console.log("response");
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    const jsonResp = response.json();
-                    console.log(jsonResp);
-                    return jsonResp;
-                })
-                .then(data => {
-                    window.open(data.url, '__blank');
-                })
-                .catch(error => {
-                    document.getElementById('sessionStatus').innerText = 'Error: ' + error.message;
-                });
+                // const apiUrl = `http://3.137.192.177:3000/create`;
+                // fetch(apiUrl, {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json',
+                //     },
+                //     body: JSON.stringify(teamPaste),
+                // }) 
+                // .then(response => {
+                //     console.log("response");
+                //     if (!response.ok) {
+                //         throw new Error('Network response was not ok ' + response.statusText);
+                //     }
+                //     const jsonResp = response.json();
+                //     console.log(jsonResp);
+                //     return jsonResp;
+                // })
+                // .then(data => {
+                //     window.open(data.url, '__blank');
+                // })
+                // .catch(error => {
+                //     document.getElementById('sessionStatus').innerText = 'Error: ' + error.message;
+                // });
+                generatePasteUrl(teamPaste);
             });
 
             function updatePokeballs() {
@@ -260,7 +272,7 @@
                 if (data) {
                     const pkmn = poolCopy.find((pkmn) => pkmn.name == data.name);
                     if (pkmn) {
-                        document.getElementById('stats').innerHTML = pkmn.paste.replace(/\n/g, '<br>');
+                        document.getElementById('stats').innerHTML = getFormattedPokemonStats(pkmn, true);
                     }
 
                     svgDoc.querySelector(`#pkmnSpriteBorder`).style.display = "inline";
@@ -294,6 +306,25 @@
                     contentDiv.innerHTML = '<h1>Error loading Content</h1>';
                     console.error('Error loading contnet:', error);
                 });  
+            }
+
+            // Returns a string of the pokemons stats in either html or pokepaste formats
+            function getFormattedPokemonStats(pkmn, inHtml) {
+                const stats = pkmn.stats;
+                let deliminator = inHtml ? '<br>' : '\r\n';
+                let formatted = pkmn.name + ' @ ' + stats.item + deliminator;
+                formatted += 'Ability: ' + stats.ability + deliminator;
+                formatted += 'Level: 50' + deliminator;
+                formatted += 'Tera Type: ' + stats.tera + deliminator;
+                formatted += 'EVs: ' + stats.evs + deliminator;
+                formatted += stats.nature + ' Nature' + deliminator;
+                formatted += '- ' + stats.moves[0] + deliminator;
+                formatted += '- ' + stats.moves[1] + deliminator;
+                formatted += '- ' + stats.moves[2] + deliminator;
+                formatted += '- ' + stats.moves[3];
+
+                console.log(formatted);
+                return formatted;
             }
 
             

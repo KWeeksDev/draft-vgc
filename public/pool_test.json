@@ -1,218 +1,506 @@
 [
         {
-            "name": "rillaboom",
+            "name": "Rillaboom",
             "type": "GRASS",
             "role": "Physical Utility",
-            "paste": "Rillaboom @ Grassy Seed\r\nAbility: Gorassy Surge\r\nLevel: 50\r\nTera Type: Fire\r\nEVs: 252 HP / 116 Atk / 4 Def / 60 SpD / 76 Spe\r\nAdamant Nature\r\n- Fake Out\r\n- Grassy Glide\r\n- Wood Hammer\r\n- U-turn"
+            "stats": {
+                "item": "Grassy Seed",
+                "ability": "Gorassy Surge",
+                "level": 50,
+                "tera": "Fire",
+                "evs": "252 HP / 116 Atk / 4 Def / 60 SpD / 76 Spe",
+                "nature":"Adamant",
+                "moves": ["Fake Out","Grassy Glide","Wood Hammer","U-turn"]
+            }
         },
         {
-            "name": "gholdengo",
+            "name": "Gholdengo",
             "type": "STEEL GHOST",
             "role": "Special Sweeper",
-            "paste": "Gholdengo @ Metal Coat\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Metal Coat",
+                "ability": "Good as Gold",
+                "level": 50,
+                "tera": "Steel",
+                "evs": "4 HP / 252 SpA / 252 Spe",
+                "nature":"Timid",
+                "moves": ["Make it Rain","Shadow Ball","Thunderbolt","Trick"]
+            }
         },
         {
-            "name": "sneasler",
+            "name": "Sneasler",
             "type": "FIGHTING POISON",
             "role": "Physical Sweeper",
-            "paste": "Sneasler @ Normal Gem\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": { 
+                "item": "White Herb",
+                "ability": "Unburden",
+                "level": 50,
+                "tera": "Dark",
+                "evs": "4 HP / 252 Atk / 252 Spe",
+                "nature":"Jolly",
+                "moves": ["Fake Out","Close Combat","Dire Claw","Throat Chop"]
+            }
         }, 
         {
-            "name": "kingambit",
+            "name": "Kingambit",
             "type": "DARK STEEL",
             "role": "Physical Sweeper",
-            "paste": "Kingambit @ Black Glasses\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {              
+                "item": "Black Glasses",
+                "ability": "Defiant",
+                "level": 50,
+                "tera": "Dark",
+                "evs": "252 HP / 252 Atk / 4 SpD",
+                "nature":"Adamant",
+                "moves": ["Sucker Punch","Kowtow Cleave","Iron Head","Protect"]
+            }
         },               
         {
-            "name": "archaludon",
+            "name": "Archaludon",
             "type": "STEEL DRAGON",
             "role": "Physical Sweeper",
-            "paste": "Archaludon @ Power Herb\r\nAbility: Stamina\r\nLevel: 50\r\nTera Type: Grass\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Power Herb",
+                "ability": "Stamina",
+                "level": 50,
+                "tera": "Grass",
+                "evs": "4 HP / 252 SpA / 252 Spe",
+                "nature":"Timid",
+                "moves": ["Electro Shot","Flash Cannon","Draco Meteor","Protect"]
+            }
         },
         {
-            "name": "primarina",
+            "name": "Primarina",
             "type": "WATER FAIRY",
             "role": "Special Sweeper",
-            "paste": "Primarina @ Throat Spray\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Throat Spray",
+                "ability": "Liquid Voice",
+                "level": 50,
+                "tera": "Steel",
+                "evs": "228 HP / 188 Def / 28 SpA / 4 SpD / 60 Spe",
+                "nature":"Modest",
+                "moves": ["Hyper Voice","Moonblast","Protect","Haze"]
+            }
         },
         {
-            "name": "incineroar",
+            "name": "Incineroar",
             "type": "FIRE DARK",
             "role": "Physical Utility",
-            "paste": "Incineroar @ Safety Goggles\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Safety Goggles",
+                "ability": "Intimidate",
+                "level": 50,
+                "tera": "Ghost",
+                "evs": "252 HP / / 36 Atk / 96 Def / 116 SpD / 12 Spe",
+                "nature":"Adamant",
+                "moves": ["Fake Out","Knock Off","Flare Blitz","Parting Shot"]
+            }
         },
         {
-            "name": "dragonite",
+            "name": "Dragonite",
             "type": "DRAGON FLYING",
             "role": "Physical Sweeper",
-            "paste": "Dragonite @ Lum Berry\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Lum Berry",
+                "ability": "Multiscale",
+                "level": 50,
+                "tera": "Normal",
+                "evs": "4 HP / 252 Atk / 252 Spe",
+                "nature":"Adamant",
+                "moves": ["Extreme Speed","Outrage","Ice Spinner","Low Kick"]
+            }
         },
         {
-            "name": "garchomp",
+            "name": "Garchomp",
             "type": "DRAGON GROUND",
             "role": "Physical Sweeper",
-            "paste": "Garchomp @ Clear Amulet\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Clear Amulet",
+                "ability": "Rough Skin",
+                "level": 50,
+                "tera": "Ground",
+                "evs": "252 Atk / 4 SpD / 252 Spe",
+                "nature":"Jolly",
+                "moves": ["Earthquake","Stomping Tantrum","Dragon Claw","Protect"]
+            }
         },
         {
-            "name": "ursaluna-bloodmoon",
+            "name": "Ursaluna-Bloodmoon",
             "type": "GROUND NORMAL",
             "role": "Special Sweeper",
-            "paste": "Ursaluna-Bloodmoon @ Silk Scarf\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Silk Scarf",
+                "ability": "Mind's Eye",
+                "level": 50,
+                "tera": "Normal",
+                "evs": "4 HP / 252 SpA / 252 Spe",
+                "nature":"Modest",
+                "moves": ["Earth Power","Blood Moon","Vacuum Wave","Protect"]
+            }
         },
         {
-            "name": "amoonguss",
+            "name": "Amoonguss",
             "type": "GRASS POISON",
             "role": "Redirection Support",
-            "paste": "Amoonguss @ Black Sludge\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Black Sludge",
+                "ability": "Regenerator",
+                "level": 50,
+                "tera": "Water",
+                "evs": "244 HP / 156 Def / 108 SpD",
+                "nature":"Bold",
+                "moves": ["Rage Powder","Spre","Pollen Puff","Clear Smog"]
+            }
         },
         {
-            "name": "annihilape",
+            "name": "Annihilape",
             "type": "GHOST FIGHTING",
             "role": "Physical Sweeper",
-            "paste": "Annihilape @ Choice Scarf\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Choice Scarf",
+                "ability": "Defiant",
+                "level": 50,
+                "tera": "Grass",
+                "evs": "252 HP / 4 Atk / 252 Spe",
+                "nature":"Jolly",
+                "moves": ["Rage Fist","Final Gambit","Drain Punch","U-turn"]
+            }
         },
         {
-            "name": "pelipper",
+            "name": "Pelipper",
             "type": "WATER FLYING",
             "role": "Special Weather",
-            "paste": "Pelipper @ Focus Sash\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Damp Rock",
+                "ability": "Drizzle",
+                "level": 50,
+                "tera": "Ground",
+                "evs": "4 HP / 252 SpA / 252 Spe",
+                "nature":"Timid",
+                "moves": ["Hurricane","Weather Ball","Protect","Tailwind"]
+            }
         },
         {
-            "name": "indeedee-f",
+            "name": "Indeedee-F (F)",
             "type": "PSYCHIC",
             "role": "Trickroom Support",
-            "paste": "Indeedee-F @ Psychic Seeds\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Psychic Seeds",
+                "ability": "Psychic Surge",
+                "level": 50,
+                "tera": "Fairy",
+                "evs": "252 HP / 252 SpA / 4 SpD",
+                "nature":"Bold",
+                "moves": ["Follow Me","Trick Room","Psychic","Dazzling Gleam"]
+            }
         },
         {
-            "name": "whimsicott",
+            "name": "Whimsicott",
             "type": "GRASS FAIRY",
             "role": "Utility Support",
-            "paste": "Whimsicott @ Mental Herb\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Mental Herb",
+                "ability": "Prankster",
+                "level": 50,
+                "tera": "Dark",
+                "evs": "4 HP / 252 SpA / 252 Spe",
+                "nature":"Timid",
+                "moves": ["Tailwind","Moonblast","Encore","Sunny Day"]
+            }
         },
         {
-            "name": "maushold",
+            "name": "Maushold",
             "type": "NORMAL",
-            "role": "Physical Sweeper",
-            "paste": "Maushold @ Wide Lens\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "role": "Physical Utility",
+            "stats": {
+                "item": "Wide Lens",
+                "ability": "Technician",
+                "level": 50,
+                "tera": "Ghost",
+                "evs": "4 HP / 252 Atk / 252 Spe",
+                "nature":"Jolly",
+                "moves": ["Population Bomb","Taunt","Protect","Follow Me"]
+            }
         },
         {
-            "name": "torkoal",
+            "name": "Torkoal",
             "type": "FIRE",
             "role": "Special Weather",
-            "paste": "Torkoal @ Charcoal\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Charcoal",
+                "ability": "Drought",
+                "level": 50,
+                "tera": "Fire",
+                "evs": "252 HP / 252 SpA / 4 SpD",
+                "nature":"Quiet",
+                "moves": ["Eruption","Earth Power","Clear Smog","Protect"]
+            }
         },
         {
-            "name": "ursaluna",
+            "name": "Ursaluna",
             "type": "GROUND NORMAL",
             "role": "Physical Sweeper",
-            "paste": "Ursaluna @ Flame Orb\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Flame Orb",
+                "ability": "Guts",
+                "level": 50,
+                "tera": "Normal",
+                "evs": "252 HP / 252 Atk / 4 SpD",
+                "nature":"Brave",
+                "moves": ["Facade","Headlong Rush","Earthquake","Protect"]
+            }
         },
         {
-            "name": "armarouge",
+            "name": "Armarouge",
             "type": "FIRE PSYCHIC",
             "role": "Special Sweeper",
-            "paste": "Armarouge @ Weakness Policy\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Weakness Policy",
+                "ability": "Weak Armor",
+                "level": 50,
+                "tera": "Psychic",
+                "evs": "180 HP / 252 SpA / 76 Spe",
+                "nature":"Modest",
+                "moves": ["Expanding Force","Armor Cannon","Protect","Aura Sphere"]
+            }
         },
         {
-            "name": "murkrow",
+            "name": "Murkrow",
             "type": "DARK FLYING",
             "role": "Support",
-            "paste": "Murkrow @ Eviolite\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Eviolite",
+                "ability": "Prankster",
+                "level": 50,
+                "tera": "Ghost",
+                "evs": "252 HP / 140 Def / 116 SpD",
+                "nature":"Bold",
+                "moves": ["Prankster","Foul Play","Rain Dance","Haze"]
+            }
         },
         {
-            "name": "ninetales-alola",
+            "name": "Ninetales-Alola",
             "type": "ICE FAIRY",
             "role": "Special Weather",
-            "paste": "Ninetales-Alola @ Never-Melt Ice\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Never-Melt Ice",
+                "ability": "Snow Warning",
+                "level": 50,
+                "tera": "Ice",
+                "evs": "4 HP / 252 SpA / 252 Spe",
+                "nature":"Timid",
+                "moves": ["Blizzard","Freeze-Dry","Moonblast","Encore"]
+            }
         },
         {
-            "name": "tyranitar",
+            "name": "Tyranitar",
             "type": "ROCK DARK",
             "role": "Phyiscal Weather",
-            "paste": "Tyranitar @ Assault Vest\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Assault Vest",
+                "ability": "Sand Stream",
+                "level": 50,
+                "tera": "Flying",
+                "evs": "188 HP / 172 Atk / 4 Def / 12 SpD / 132 Spe",
+                "nature":"Adamant",
+                "moves": ["Rock Slide","Knock Off","Tera Blast","Low Kick"]
+            }
         },
         {
-            "name": "talonflame",
+            "name": "Talonflame",
             "type": "FIRE FLYING",
             "role": "Physical Support",
-            "paste": "Talonflame @ Covert Cloak\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Covert Cloak",
+                "ability": "Gale Wings",
+                "level": 50,
+                "tera": "Ghost",
+                "evs": "4 HP / 252 Atk / 252 Spe",
+                "nature":"Jolly",
+                "moves": ["Tailwind","Flare Blitz","Brave Bird","Will=O=Wisp"]
+            }
         },
         {
-            "name": "basculegion (m)",
+            "name": "Basculegion (M)",
             "type": "WATER GHOST",
             "role": "Physical Sweeper",
-            "paste": "Basculegion (M)@ Choice Band\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Choice Band",
+                "ability": "Swift Swim",
+                "level": 50,
+                "tera": "Water",
+                "evs": "4 HP / 252 Atk / 252 Spe",
+                "nature":"Adamant",
+                "moves": ["Last Respects","Wave Crash","Aqua Jet","Flip Turn"]
+            }
         },
         {
-            "name": "hydreigon",
+            "name": "Hydreigon",
             "type": "DARK DRAGON",
             "role": "Special Sweeper",
-            "paste": "Hydreigon @ Scope Lens\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Scope Lens",
+                "ability": "Levitate",
+                "level": 50,
+                "tera": "Fire",
+                "evs": "4 HP / 252 SpA / 252 Spe",
+                "nature":"Timid",
+                "moves": ["Focus Energy","Snarl","Draco MEteor","Heat Wave"]
+            }
         },
         {
-            "name": "farigiraf",
+            "name": "Farigiraf",
             "type": "PSYCHIC NORMAL",
             "role": "Special Trickroom",
-            "paste": "Farigiraf @ Leftovers\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Leftovers",
+                "ability": "Armor Tail",
+                "level": 50,
+                "tera": "Fairy",
+                "evs": "226 HP / 4 Def / 156 SpA / 4 SpD/ 116 Spe",
+                "nature":"Modest",
+                "moves": ["Hyper Voice","Helping Hand","Psychic","Trick Room"]
+            }
         },
         {
-            "name": "sinistcha",
+            "name": "Sinistcha",
             "type": "GRASS GHOST",
             "role": "Support Redirection",
-            "paste": "Sinistcha @ Big Root\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Big Root",
+                "ability": "Hospitality",
+                "level": 50,
+                "tera": "Water",
+                "evs": "252 HP / 60 Def / 4 SpA / 188 SpD / 4 Spe",
+                "nature":"Calm",
+                "moves": ["Matcha Gotcha","Rage Powder","Life Dew","Shadow Ball"]
+            }
         },
         {
-            "name": "gallade",
+            "name": "Gallade",
             "type": "PSYCHIC FIGHTING",
             "role": "Physical Trickroom",
-            "paste": "Gallade @ White Herb\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Focus Sash",
+                "ability": "Sharpness",
+                "level": 50,
+                "tera": "Steel",
+                "evs": "4 HP / 252 Atk / 252 Spe",
+                "nature":"Adamant",
+                "moves": ["Sacred Sword","Pyscho Cut","Wide Guard","Trick Room"]
+            }
         },
         {
-            "name": "grimmsnarl",
+            "name": "Grimmsnarl",
             "type": "DARK FAIRY",
             "role": "Support Utility",
-            "paste": "Grimmsnarl @ Light Clay\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Light Clay",
+                "ability": "Prankster",
+                "level": 50,
+                "tera": "Steel",
+                "evs": "252 HP / 140 Def / 116 SpD",
+                "nature":"Careful",
+                "moves": ["Light Screen","Reflect","Spirit Break","Thunderwave"]
+            }
         },
         {
-            "name": "meowscarada",
+            "name": "Meowscarada",
             "type": "GRASS DARK",
             "role": "Physical Sweeper",
-            "paste": "Meowscarada @ Life Orb\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Life Orb",
+                "ability": "Protean",
+                "level": 50,
+                "tera": "Ice",
+                "evs": "252 Atk / 4 SpD / 252 Spe",
+                "nature":"Jolly",
+                "moves": ["Flower Trick","Knock Off","Triple Axel","Protect"]
+            }
         },
         {
-            "name": "glimmora",
+            "name": "Glimmora",
             "type": "ROCK POISON",
             "role": "Special Sweeper",
-            "paste": "Glimmora @ Air Balloon\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Air Balloon",
+                "ability": "Toxic Debris",
+                "level": 50,
+                "tera": "Grass",
+                "evs": "4 HP / 252 SpA / 252 Spe",
+                "nature":"Timid",
+                "moves": ["Earth Power","Sludge Bomb","Spiky Shield","Power Gem"]
+            }
         },
         {
-            "name": "corviknight",
+            "name": "Corviknight",
             "type": "STEEL FLYING",
             "role": "Support Tank",
-            "paste": "Corviknight @ Rocky Helmet\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Rocky Helmet",
+                "ability": "Mirror Armor",
+                "level": 50,
+                "tera": "Dragon",
+                "evs": "252 HP / 76 Atk / 4 Def / 92 SpD / 84 Spe",
+                "nature":"Adamant",
+                "moves": ["Brave Bird","Roost","Bulk Up","Body Press"]
+            }
         },
         {
-            "name": "tauros-paldea-aqua",
+            "name": "Tauro-Paldea-Aqua",
             "type": "WATER FIGHTING",
             "role": "Physical Sweeper",
-            "paste": "Tauro-Paldea-Aqua @ Mirror Herb\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Mirror Herb",
+                "ability": "Intimidate",
+                "level": 50,
+                "tera": "Grass",
+                "evs": "4 HP / 252 Atk / 252 Spe",
+                "nature":"Jolly",
+                "moves": ["Close Combat","Raging Bull","Aqua Jet","Protect"]
+            }
         },
         {
-            "name": "baxcalibur",
+            "name": "Baxcalibur",
             "type": "ICE DRAGON",
             "role": "Physical Sweeper",
-            "paste": "Baxcalibur @ Loaded Dice\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Loaded Dice",
+                "ability": "Thermal Exchange",
+                "level": 50,
+                "tera": "Dragon",
+                "evs": "12 HP / 252 Atk / 12 Def / 28 SpD / 204 Spe",
+                "nature":"Adamant",
+                "moves": ["Protect","Ice Shard","Icicle Spear","Scale Shot"]
+            }
         },
         {
-            "name": "delphox",
+            "name": "Delphox",
             "type": "FIRE PSYCHIC",
             "role": "Special Sweeper",
-            "paste": "Delphox @ Choice Specs\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Choice Specs",
+                "ability": "Blaze",
+                "level": 50,
+                "tera": "Psychic",
+                "evs": "252 SpA / 4 SpD / 252 Spe",
+                "nature":"Timid",
+                "moves": ["Expanding Force","Heat Wave","Protect","Switcheroo"]
+            }
         },
         {
-            "name": "palafin",
+            "name": "Palafin",
             "type": "WATER",
             "role": "Physical Sweeper",
-            "paste": "Palafin @ Mystic Water\r\nAbility: Good as Gold\r\nLevel: 50\r\nTera Type: Steel\r\nEVs: 4 HP / 252 SpA / 252 Spe\r\nTimid Nature\r\n- Make it Rain\r\n- Shadow Ball\r\n- Thunderbolt\r\n- Trick"
+            "stats": {
+                "item": "Mystic Water",
+                "ability": "Zero to Hero",
+                "level": 50,
+                "tera": "Water",
+                "evs": "252 HP / 252 SpA / 4 SpD",
+                "nature":"Adamant",
+                "moves": ["Jet Punch","Wave Crash","Haze","Close Combat"]
+            }
         }
     ]

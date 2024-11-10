@@ -156,6 +156,28 @@ io.on('connection', (socket) => {
             }
         }
     });
+
+    socket.on('generatePasteUrl', async (paste) => {
+        const Paste = paste;
+        console.log('Paste:');
+        console.log(paste);
+        try {
+            const response = await axios.post('https://pokepast.es/create', null, {
+                params: {
+                    paste: Paste,
+                },
+            });
+    
+            const pokePasteUrl = response.request.res.responseUrl;
+            console.log(pokePasteUrl);
+            //res.json({ url: pokePasteUrl }); // Send the response back to the client
+            socket.emit('pasteUrl', pokePasteUrl);
+        } catch (error) {
+            console.error(error);
+            // Send an error response back to the client
+            //res.status(500).json({ error: 'Failed to create PokePaste', details: error.message });
+        }
+    });
 });
 
 // start a server
