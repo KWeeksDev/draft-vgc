@@ -1,6 +1,7 @@
 [
         {
             "name": "Rillaboom",
+            "id": 812,
             "type": "GRASS",
             "role": "Physical Utility",
             "stats": {
@@ -15,6 +16,7 @@
         },
         {
             "name": "Gholdengo",
+            "id": 1000,
             "type": "STEEL GHOST",
             "role": "Special Sweeper",
             "stats": {
@@ -29,6 +31,7 @@
         },
         {
             "name": "Sneasler",
+            "id": 903,
             "type": "FIGHTING POISON",
             "role": "Physical Sweeper",
             "stats": { 
@@ -43,6 +46,7 @@
         }, 
         {
             "name": "Kingambit",
+            "id": 983,
             "type": "DARK STEEL",
             "role": "Physical Sweeper",
             "stats": {              
@@ -57,6 +61,7 @@
         },               
         {
             "name": "Archaludon",
+            "id": 1018,
             "type": "STEEL DRAGON",
             "role": "Physical Sweeper",
             "stats": {
@@ -71,6 +76,7 @@
         },
         {
             "name": "Primarina",
+            "id": 130,
             "type": "WATER FAIRY",
             "role": "Special Sweeper",
             "stats": {
@@ -85,6 +91,7 @@
         },
         {
             "name": "Incineroar",
+            "id": 727,
             "type": "FIRE DARK",
             "role": "Physical Utility",
             "stats": {
@@ -99,6 +106,7 @@
         },
         {
             "name": "Dragonite",
+            "id": 159,
             "type": "DRAGON FLYING",
             "role": "Physical Sweeper",
             "stats": {
@@ -113,6 +121,7 @@
         },
         {
             "name": "Garchomp",
+            "id": 445,
             "type": "DRAGON GROUND",
             "role": "Physical Sweeper",
             "stats": {
@@ -127,6 +136,7 @@
         },
         {
             "name": "Ursaluna-Bloodmoon",
+            "id": 10272,
             "type": "GROUND NORMAL",
             "role": "Special Sweeper",
             "stats": {
@@ -141,6 +151,7 @@
         },
         {
             "name": "Amoonguss",
+            "id": 591,
             "type": "GRASS POISON",
             "role": "Redirection Support",
             "stats": {
@@ -155,6 +166,7 @@
         },
         {
             "name": "Annihilape",
+            "id": 979,
             "type": "GHOST FIGHTING",
             "role": "Physical Sweeper",
             "stats": {
@@ -169,6 +181,7 @@
         },
         {
             "name": "Pelipper",
+            "id": 279,
             "type": "WATER FLYING",
             "role": "Special Weather",
             "stats": {
@@ -183,6 +196,7 @@
         },
         {
             "name": "Indeedee-F (F)",
+            "id": 10186,
             "type": "PSYCHIC",
             "role": "Trickroom Support",
             "stats": {
@@ -197,6 +211,7 @@
         },
         {
             "name": "Whimsicott",
+            "id": 547,
             "type": "GRASS FAIRY",
             "role": "Utility Support",
             "stats": {
@@ -211,6 +226,7 @@
         },
         {
             "name": "Maushold",
+            "id": 925,
             "type": "NORMAL",
             "role": "Physical Utility",
             "stats": {
@@ -225,6 +241,7 @@
         },
         {
             "name": "Torkoal",
+            "id": 324,
             "type": "FIRE",
             "role": "Special Weather",
             "stats": {
@@ -239,6 +256,7 @@
         },
         {
             "name": "Ursaluna",
+            "id": 901,
             "type": "GROUND NORMAL",
             "role": "Physical Sweeper",
             "stats": {
@@ -253,6 +271,7 @@
         },
         {
             "name": "Armarouge",
+            "id": 936,
             "type": "FIRE PSYCHIC",
             "role": "Special Sweeper",
             "stats": {
@@ -267,6 +286,7 @@
         },
         {
             "name": "Murkrow",
+            "id": 198,
             "type": "DARK FLYING",
             "role": "Support",
             "stats": {
@@ -281,6 +301,7 @@
         },
         {
             "name": "Ninetales-Alola",
+            "id": 10104,
             "type": "ICE FAIRY",
             "role": "Special Weather",
             "stats": {
@@ -295,6 +316,7 @@
         },
         {
             "name": "Tyranitar",
+            "id": 248,
             "type": "ROCK DARK",
             "role": "Phyiscal Weather",
             "stats": {
@@ -309,6 +331,7 @@
         },
         {
             "name": "Talonflame",
+            "id": 663,
             "type": "FIRE FLYING",
             "role": "Physical Support",
             "stats": {
@@ -323,6 +346,7 @@
         },
         {
             "name": "Basculegion (M)",
+            "id": 902,
             "type": "WATER GHOST",
             "role": "Physical Sweeper",
             "stats": {
@@ -337,6 +361,7 @@
         },
         {
             "name": "Hydreigon",
+            "id": 635,
             "type": "DARK DRAGON",
             "role": "Special Sweeper",
             "stats": {
@@ -351,6 +376,7 @@
         },
         {
             "name": "Farigiraf",
+            "id": 981,
             "type": "PSYCHIC NORMAL",
             "role": "Special Trickroom",
             "stats": {
@@ -365,6 +391,7 @@
         },
         {
             "name": "Sinistcha",
+            "id": 1013,
             "type": "GRASS GHOST",
             "role": "Support Redirection",
             "stats": {
@@ -379,6 +406,7 @@
         },
         {
             "name": "Gallade",
+            "id": 10068,
             "type": "PSYCHIC FIGHTING",
             "role": "Physical Trickroom",
             "stats": {
@@ -393,6 +421,7 @@
         },
         {
             "name": "Grimmsnarl",
+            "id": 10222,
             "type": "DARK FAIRY",
             "role": "Support Utility",
             "stats": {
@@ -407,6 +436,7 @@
         },
         {
             "name": "Meowscarada",
+            "id": 908,
             "type": "GRASS DARK",
             "role": "Physical Sweeper",
             "stats": {
@@ -421,6 +451,7 @@
         },
         {
             "name": "Glimmora",
+            "id": 970,
             "type": "ROCK POISON",
             "role": "Special Sweeper",
             "stats": {
@@ -435,6 +466,7 @@
         },
         {
             "name": "Corviknight",
+            "id": 10212,
             "type": "STEEL FLYING",
             "role": "Support Tank",
             "stats": {
@@ -448,7 +480,8 @@
             }
         },
         {
-            "name": "Tauro-Paldea-Aqua",
+            "name": "Tauros-Paldea-Aqua",
+            "id": 10252,
             "type": "WATER FIGHTING",
             "role": "Physical Sweeper",
             "stats": {
@@ -463,6 +496,7 @@
         },
         {
             "name": "Baxcalibur",
+            "id": 998,
             "type": "ICE DRAGON",
             "role": "Physical Sweeper",
             "stats": {
@@ -477,6 +511,7 @@
         },
         {
             "name": "Delphox",
+            "id": 655,
             "type": "FIRE PSYCHIC",
             "role": "Special Sweeper",
             "stats": {
@@ -490,7 +525,8 @@
             }
         },
         {
-            "name": "Palafin",
+            "name": "Palafin-Zero",
+            "id": 964,
             "type": "WATER",
             "role": "Physical Sweeper",
             "stats": {

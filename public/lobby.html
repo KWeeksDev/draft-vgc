@@ -89,8 +89,8 @@
                 });
 
                 document.getElementById(`teammate${i}`).addEventListener('mouseover', function() {    
-                    const pkmnName = document.getElementById(`pick${i}Icon`).alt;
-                    const pkmn = poolCopy.find((pkmn) => pkmn.name == pkmnName);
+                    const pkmnId = document.getElementById(`pick${i}Icon`).alt;
+                    const pkmn = poolCopy.find((pkmn) => pkmn.id == pkmnId);
                     if (pkmn) {
                         document.getElementById('teamStats').innerHTML = getFormattedPokemonStats(pkmn, true);
                     }
@@ -111,10 +111,8 @@
                 // Setup balls
                 for (let i = 1; i < 4; i++) {
                     svgDoc.querySelector(`#ball_1_${i}`).addEventListener('click', () => {
-                        let pickStr = `${currentPack[i-1].name}`;
-                        console.log(pickStr);
-                        currentPick = pickStr.toLowerCase();
-                        const apiUrl = 'https://pokeapi.co/api/v2/pokemon/' + currentPick;
+                        let pick = `${currentPack[i-1].id}`;                        
+                        const apiUrl = 'https://pokeapi.co/api/v2/pokemon/' + pick;
                         fetch(apiUrl)
                         .then(response => {
                             if (!response.ok) {
@@ -217,15 +215,13 @@
 
             // Create a pokePaste from the six selected team pokemon
             generateTeamButton.addEventListener('click', () => {
-                console.log("generate button");
                 const team = [];
                 for (let i = 1; i < 10; i++) {
                     if (document.getElementById(`teammate${i}`).classList.contains('selected')) { team.push(document.getElementById(`pick${i}Icon`).alt)}
                 }
-                console.log(team);
                 let teamPaste = "";
                 for (let p = 0; p < team.length; p++) {
-                    const pkmn = poolCopy.find(e => e.name.toLowerCase() == team[p]);
+                    const pkmn = poolCopy.find(e => e.id == team[p]);
                     if (pkmn) {
                         if (teamPaste == "") {
                             teamPaste = getFormattedPokemonStats(pkmn, false);
@@ -235,8 +231,7 @@
                         teamPaste += "\r\n\r\n";
                     } else { console.log("pkmon not found");}
                 }
-                console.log(teamPaste);
-                // const apiUrl = `http://3.137.192.177:3000/create`;
+
                 // fetch(apiUrl, {
                 //     method: 'POST',
                 //     headers: {
@@ -270,7 +265,7 @@
 
             function updatePokemonVisuals(data) {
                 if (data) {
-                    const pkmn = poolCopy.find((pkmn) => pkmn.name == data.name);
+                    const pkmn = poolCopy.find((pkmn) => pkmn.id == data.id);
                     if (pkmn) {
                         document.getElementById('stats').innerHTML = getFormattedPokemonStats(pkmn, true);
                     }
@@ -278,7 +273,7 @@
                     svgDoc.querySelector(`#pkmnSpriteBorder`).style.display = "inline";
                     document.getElementById('sprite').style.display = "inline";
                     document.getElementById('sprite').src = data.sprites.front_default;
-                    document.getElementById('sprite').alt = data.name;
+                    document.getElementById('sprite').alt = data.id;
                 } else {
                     svgDoc.querySelector(`#pkmnSpriteBorder`).style.display = "none";
                     document.getElementById('sprite').style.display = "none";
