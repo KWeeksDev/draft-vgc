@@ -111,8 +111,9 @@
                 // Setup balls
                 for (let i = 1; i < 4; i++) {
                     svgDoc.querySelector(`#ball_1_${i}`).addEventListener('click', () => {
-                        let pick = `${currentPack[i-1].id}`;                        
-                        const apiUrl = 'https://pokeapi.co/api/v2/pokemon/' + pick;
+                        currentPick = i-1;
+                        let pickId = `${currentPack[i-1].id}`;                        
+                        const apiUrl = 'https://pokeapi.co/api/v2/pokemon/' + pickId;
                         fetch(apiUrl)
                         .then(response => {
                             if (!response.ok) {
@@ -158,6 +159,10 @@
                 }
             })
 
+            socket.on('updatePokeballs', (balls) => {
+                updatePokeballs(balls);
+            })
+
             socket.on('pokemonPool', (pool) => {
                 console.log("pokemonPool");
                 poolCopy = pool;
@@ -172,6 +177,7 @@
             socket.on('roundUpdated', (rnd, pck) => {
                 updateRoundInfo(rnd,pck);
             })
+
             socket.on('nextPack', (pack) => {
                 console.log("nextPack");
                 currentPack = pack;
@@ -183,7 +189,7 @@
             })
 
             socket.on('readyForNextPack', () => {
-                console.log("Rady for next pack");
+                console.log("Ready for next pack");
                 document.getElementById("sessionStatus").innerText = "Select a Pokemon!";
                 getPack(userId);
             })
@@ -210,6 +216,7 @@
                 document.getElementById(`pick${totalPicks}Icon`).alt = document.getElementById('sprite').alt;
                 updatePokemonVisuals();
                 totalPicks++;
+                console.log(`CurrentPick - lobby = ${currentPick}`);
                 makePick(userId, currentPick);
             });
 
@@ -284,6 +291,7 @@
             function updateRoundInfo(round, pick) {
                 svgDoc.querySelector(`#roundNumber`).textContent = round;
                 svgDoc.querySelector(`#pickNumber`).textContent = pick;
+                //getPacks(userId);
             }
 
             function loadJson(pool) {

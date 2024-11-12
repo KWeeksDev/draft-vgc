@@ -141,7 +141,7 @@ io.on('connection', (socket) => {
         const userIndex = sessions[sId].GetUserIndex(uId);
         if (userIndex >= 0) {
             const packNumber = packOrder[userIndex][sessions[sId].currentRound-1][sessions[sId].currentPick-1];
-            sessions[sId].packs[packNumber][pick] = "";
+            sessions[sId].packs[packNumber][pick] = undefined;
             if (sessions[sId].SaveUserPick(userIndex, pick)) {
                 //next packs
                 if (!sessions[sId].AdvancePickRound()) {
