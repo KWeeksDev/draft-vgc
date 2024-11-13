@@ -115,8 +115,16 @@ io.on('connection', (socket) => {
         io.to(sessionId).emit('pokemonPool', sessions[sessionId].pool);
     });
 
-    socket.on('getPacks', (sessionId) => {
-        io.to(sessionId).emit('pokemonPacks', packs[sessionId]);
+    socket.on('getPacks', (sId) => {
+        console.log('on get pokemon packs')
+        let packs = [];
+        let users = sessions[sId].GetUserNames();
+        console.log(users);
+        for (let i = 0; i < 4; i++) {
+            const packNumber = packOrder[i][sessions[sId].currentRound-1][sessions[sId].currentPick-1];
+            packs.push({'user':users[i], 'pack':sessions[sId].GetPack(packNumber)});
+        }       
+        socket.emit('pokemonPacks', packs);
     });
 
     socket.on('getPack', (sId, uId) => {

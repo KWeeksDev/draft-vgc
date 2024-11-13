@@ -67,7 +67,7 @@ class Session {
         let names = [];
         for (let i = 0; i < this.users.length; i++) {
             if (this.users[i].user) {
-            names.push(this.users[i].user.userId);
+                names.push(this.users[i].user.userId);
             } else {
                 names.push("");
             }

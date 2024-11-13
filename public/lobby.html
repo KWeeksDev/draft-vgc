@@ -4,65 +4,79 @@
         <link rel="stylesheet" href="lobby.css">
     </head>
     <body>
-        <h1 id=sessionName></h1>
-        <h2 id="sessionStatus">Waiting for Players</h2>
-        <img id="sprite" src="" style="position:absolute;left:282px;top:360px;width:90px;height:90px;"/> 
-        <button id="start-button">Start the Draft</button>
-        <button id="selectPokemon">Select Pokemon</button>
-        <button id="generateTeam">Generate Team</button>
-        <div class="container">
-            <object type="image/svg+xml" data="resources/PokeCenter.svg" id="pokeCenter">
-                Your Browser doesn't support SVGs
-            </object>
-            <div id="stats"></div>
+        <div class="page">
+            <div class="column">
+
+            </div>
+            <div class="column">
+                <h1 id=sessionName></h1>
+                <h2 id="sessionStatus">Waiting for Players</h2>              
+                
+                <div class="container">
+                    <object type="image/svg+xml" data="resources/PokeCenter.svg" id="pokeCenter">
+                        Your Browser doesn't support SVGs
+                    </object>
+                    <img id="sprite" class="choice" src="" />
+                    <button id="start-button" class="start btn">Start the Draft</button>
+                    <button id="selectPokemon" class="select btn">Select Pokemon</button>
+                    <button id="generateTeam" class="generate btn">Generate Team</button>                  
+                </div>
+                <div class="selection-container">
+                    <div id="teammate1" class="selection-wrapper">
+                        <img id="pick1Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                        <img id="pick1Icon" class="pick icon" src=""/>
+                    </div>
+                    <div id="teammate2" class="selection-wrapper">
+                        <img id="pick2Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                        <img id="pick2Icon" class="pick icon" src=""/>
+                    </div>
+                    <div id="teammate3" class="selection-wrapper">
+                        <img id="pick3Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                        <img id="pick3Icon" class="pick icon" src=""/>
+                    </div>
+                    <div id="teammate4" class="selection-wrapper">
+                        <img id="pick4Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                        <img id="pick4Icon" class="pick icon" src=""/>
+                    </div>
+                    <div id="teammate5" class="selection-wrapper">
+                        <img id="pick5Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                        <img id="pick5Icon" class="pick icon" src=""/>
+                    </div>
+                    <div id="teammate6" class="selection-wrapper">
+                        <img id="pick6Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                        <img id="pick6Icon" class="pick icon" src=""/>
+                    </div>
+                    <div id="teammate7" class="selection-wrapper">
+                        <img id="pick7Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                        <img id="pick7Icon" class="pick icon" src=""/>
+                    </div>
+                    <div id="teammate8" class="selection-wrapper">
+                        <img id="pick8Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                        <img id="pick8Icon" class="pick icon" src=""/>
+                    </div>
+                    <div id="teammate9" class="selection-wrapper">
+                        <img id="pick9Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
+                        <img id="pick9Icon" class="pick icon" src=""/>
+                    </div>
+                </div><div id="teamStats"></div>
+            </div>
+            <div class="column">
+                 <div id="stats" class="stats"></div>
+            </div>
         </div>
-        <div class="selection-container">
-            <div id="teammate1" class="selection-wrapper">
-                <img id="pick1Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
-                <img id="pick1Icon" class="pick icon" src=""/>
-            </div>
-            <div id="teammate2" class="selection-wrapper">
-                <img id="pick2Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
-                <img id="pick2Icon" class="pick icon" src=""/>
-            </div>
-            <div id="teammate3" class="selection-wrapper">
-                <img id="pick3Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
-                <img id="pick3Icon" class="pick icon" src=""/>
-            </div>
-            <div id="teammate4" class="selection-wrapper">
-                <img id="pick4Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
-                <img id="pick4Icon" class="pick icon" src=""/>
-            </div>
-            <div id="teammate5" class="selection-wrapper">
-                <img id="pick5Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
-                <img id="pick5Icon" class="pick icon" src=""/>
-            </div>
-            <div id="teammate6" class="selection-wrapper">
-                <img id="pick6Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
-                <img id="pick6Icon" class="pick icon" src=""/>
-            </div>
-            <div id="teammate7" class="selection-wrapper">
-                <img id="pick7Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
-                <img id="pick7Icon" class="pick icon" src=""/>
-            </div>
-            <div id="teammate8" class="selection-wrapper">
-                <img id="pick8Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
-                <img id="pick8Icon" class="pick icon" src=""/>
-            </div>
-            <div id="teammate9" class="selection-wrapper">
-                <img id="pick9Bkgd" class="pick background" src="resources/PokeballFrontSide.png"/>
-                <img id="pick9Icon" class="pick icon" src=""/>
-            </div>
-        </div>
-        <div id="teamStats"></div>
         <script >
             // Keep a reference to the svg file
             let svgDoc = document.getElementById('pokeCenter').contentDocument;
+            let pkmnSpriteBorder = {};
+            let draftComplete = false;
             // Disable the start button from start
             const startButton = document.getElementById('start-button');
+            const selectButton = document.getElementById('selectPokemon');
             const generateTeamButton = document.getElementById('generateTeam');
-            //startButton.disabled = true;
-            generateTeamButton.disabled = true;
+            const pkmnSprite = document.getElementById('sprite');
+            startButton.style.display = 'none';
+            selectButton.style.display = 'none';
+            generateTeamButton.style.display = 'none';
             let poolCopy = {};
             let currentPack = {};
             let currentPick = {};
@@ -85,7 +99,7 @@
                             teamSelected++;
                         }
                     }
-                    generateTeamButton.disabled = teamSelected != 6;
+                    generateTeamButton.style.display = draftComplete && teamSelected == 6 ? 'inline' : 'none';
                 });
 
                 document.getElementById(`teammate${i}`).addEventListener('mouseover', function() {    
@@ -99,6 +113,9 @@
             // Load the SVG
             document.getElementById('pokeCenter').addEventListener('load', function() {
                 svgDoc = this.contentDocument;
+                pkmnSpriteBorder = svgDoc.querySelector(`#pkmnSpriteBorder`);
+                pkmnSpriteBorder.style.display = "inline";
+
                 updatePokemonVisuals();
                 for (let i = 0; i < 4; i++) {
                     svgDoc.querySelector(`#nametag_${i+1}`).textContent = "";
@@ -123,6 +140,7 @@
                         })
                         .then(data => {                           
                             updatePokemonVisuals(data)
+                            selectButton.style.display = 'inline';
                         })
                         .catch(error => {
                             document.getElementById('sessionStatus').innerText = 'Error: ' + error.message;
@@ -139,7 +157,7 @@
                         loadJson('pool_test');
                         loadedJson = true;
                     }
-                    //startButton.disabled = ids.find((e) => e == "") != undefined;
+                    startButton.style.display = ids.find((e) => e == "") != undefined ? 'none' : 'inline';
                 }
                 for (let i = 0; i < 4; i++) {
                     if (ids[idx]) {                            
@@ -160,7 +178,7 @@
             })
 
             socket.on('updatePokeballs', (balls) => {
-                updatePokeballs(balls);
+                //updatePokeballs(balls);
             })
 
             socket.on('pokemonPool', (pool) => {
@@ -170,8 +188,28 @@
 
             socket.on('pokemonPack', (pack) => {
                 console.log("pokemonPack");
-                console.log(pack);
                 currentPack = pack;
+                getPacks();
+            })
+
+            socket.on('pokemonPacks', (packs) => {
+                var idx = packs.findIndex((e) => e.user === userId);
+                if (idx >= 0) {          
+                    for (let i = 0; i < 4; i++) {
+                        console.log(`${packs[idx].pack[0]}`);
+                        console.log(`${packs[idx].pack[1]}`);
+                        console.log(`${packs[idx].pack[2]}`);
+                        svgDoc.querySelector(`#ball_${i+1}_1`).style.display = packs[idx].pack[0] != null ? "inline" : "none";
+                        svgDoc.querySelector(`#ball_${i+1}_2`).style.display = packs[idx].pack[1] != null ? "inline" : "none";
+                        svgDoc.querySelector(`#ball_${i+1}_3`).style.display = packs[idx].pack[2] != null ? "inline" : "none";
+                        if (idx >= 3) {
+                            idx = 0;
+                        }
+                        else {
+                            idx++;
+                        }
+                    }
+                }
             })
 
             socket.on('roundUpdated', (rnd, pck) => {
@@ -179,9 +217,8 @@
             })
 
             socket.on('nextPack', (pack) => {
-                console.log("nextPack");
                 currentPack = pack;
-                updatePokeballs();
+                //updatePokeballs();
             })
 
             socket.on('waitingForPicks', () => {
@@ -192,12 +229,15 @@
                 console.log("Ready for next pack");
                 document.getElementById("sessionStatus").innerText = "Select a Pokemon!";
                 getPack(userId);
+
             })
 
             socket.on('draftComplete', () => {
-                document.getElementById("Select 6 Pokemon to Make your Team!").innerText = "Select a Pokemon!";
-                startButton.disabled = true;
-                selectPokemon.disabled = true;
+                document.getElementById("sessionStatus").innerText = "Select 6 Pokemon to Make your Team!";
+                startButton.style.display = 'none';
+                selectPokemon.style.display = 'none';
+                //generateTeamButton.style.display = 'inline';
+                draftComplete = true;
             })
 
             socket.on('pasteUrl', (url) => {
@@ -207,7 +247,7 @@
             // Starts the rounds off. 
             startButton.addEventListener('click', () => {
                 startRound();
-                startButton.disabled = true;
+                startButton.style.display = 'none';
             });
 
             // Selects a pokemon. Once everyone has picked, auto advances.
@@ -218,6 +258,7 @@
                 totalPicks++;
                 console.log(`CurrentPick - lobby = ${currentPick}`);
                 makePick(userId, currentPick);
+                selectButton.style.display = 'none';
             });
 
             // Create a pokePaste from the six selected team pokemon
@@ -238,29 +279,6 @@
                         teamPaste += "\r\n\r\n";
                     } else { console.log("pkmon not found");}
                 }
-
-                // fetch(apiUrl, {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //     },
-                //     body: JSON.stringify(teamPaste),
-                // }) 
-                // .then(response => {
-                //     console.log("response");
-                //     if (!response.ok) {
-                //         throw new Error('Network response was not ok ' + response.statusText);
-                //     }
-                //     const jsonResp = response.json();
-                //     console.log(jsonResp);
-                //     return jsonResp;
-                // })
-                // .then(data => {
-                //     window.open(data.url, '__blank');
-                // })
-                // .catch(error => {
-                //     document.getElementById('sessionStatus').innerText = 'Error: ' + error.message;
-                // });
                 generatePasteUrl(teamPaste);
             });
 
@@ -277,13 +295,19 @@
                         document.getElementById('stats').innerHTML = getFormattedPokemonStats(pkmn, true);
                     }
 
-                    svgDoc.querySelector(`#pkmnSpriteBorder`).style.display = "inline";
-                    document.getElementById('sprite').style.display = "inline";
-                    document.getElementById('sprite').src = data.sprites.front_default;
-                    document.getElementById('sprite').alt = data.id;
+                    pkmnSpriteBorder.style.display = "inline";
+                    pkmnSprite.style.display = "inline";
+                    let rect = pkmnSpriteBorder.getBoundingClientRect();
+                    // Set the position of the image
+                    pkmnSprite.style.top =    `${rect.top}px`;
+                    pkmnSprite.style.left =   `${rect.left}px`;
+                    pkmnSprite.style.width =  `${rect.width}px`;
+                    pkmnSprite.style.height = `${rect.height}px`;
+                    pkmnSprite.src = data.sprites.front_default;
+                    pkmnSprite.alt = data.id;
                 } else {
-                    svgDoc.querySelector(`#pkmnSpriteBorder`).style.display = "none";
-                    document.getElementById('sprite').style.display = "none";
+                    pkmnSpriteBorder.style.display = "none";
+                    pkmnSprite.style.display = "none";
                     document.getElementById('stats').innerHTML = "";
                 }
             }

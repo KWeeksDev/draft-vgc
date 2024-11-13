@@ -1,10 +1,52 @@
-body {
-    display:flex;
+html, body {
+    height: 100%;
+    margin: 0%;
+}
+
+.page {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+}
+
+.column {
+    flex: 1;
+    padding: 20px;
+}
+
+.choice {
+    position: absolute;
+    z-index: 1;
+}
+
+.start {
+    top: 5%;
+    left: 40%;
+}
+.select {
+    bottom: 5%;
+    left: 2.55%;
+}
+
+.generate {
+    bottom: 5%;
+    right: 2.55%;
+}
+
+.btn {
+    position: absolute;
+    height: 10%;
+    width: 20%; 
 }
 
 .container {
-    display: flex;
-    gap: 10px;
+    position: relative;
+}
+.stats {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .selection-container {  
