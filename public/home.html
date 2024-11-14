@@ -20,7 +20,7 @@
             document.getElementById('joinBtn').onclick = () => {
                 const userId = document.getElementById('userId').value;
                 const sessionId = document.getElementById('sessionId').value;
-                console.log(sessionId);
+                //console.log(sessionId);
                 socket.emit('joinSession', sessionId, userId);
                 document.getElementById('message').innerText = `Joining session ${sessionId}...`;
             };

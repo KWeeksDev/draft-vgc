@@ -15,8 +15,8 @@ dotenv.config();
 const PORT = process.env.API_PORT || 3000;
 const HOST = process.env.API_URL || 'localhost';
 const sessions = [];
-console.log(`HOST = ${HOST}`);
-console.log(`PORT = ${PORT}`);
+//console.log(`HOST = ${HOST}`);
+//console.log(`PORT = ${PORT}`);
 // pickOrder[user,round,pick]
 const packOrder = [[[0,3,2],[4,5,6],[8,11,10]],
                    [[1,0,3],[5,6,7],[9,8,11]],
@@ -41,7 +41,7 @@ app.post('/create', async (req, res) => {
         });
 
         const pokePasteUrl = response.request.res.responseUrl;
-        //console.log(pokePasteUrl);
+        ////console.log(pokePasteUrl);
         res.json({ url: pokePasteUrl }); // Send the response back to the client
     } catch (error) {
         console.error(error);
@@ -70,17 +70,17 @@ app.post('/join/:sessionId', (req,res) => {
 });
 
 io.on('connection', (socket) => {
-    console.log('A user connected');
+    //console.log('A user connected');
 
     socket.on('joinSession', (sessionId, userId) => {
         if (!sessions[sessionId]) {
             sessions[sessionId] = new Session(sessionId);
         }
         const idx = sessions[sessionId].AddUser(socket.id, userId);
-        console.log(`Idx = ${idx}`);
+        //console.log(`Idx = ${idx}`);
         if (idx >= 0) {
             socket.join(sessionId);
-            console.log(`User ${userId} joined session: ${sessionId}`);
+            //console.log(`User ${userId} joined session: ${sessionId}`);
             io.to(sessionId).emit('userJoined', userId, sessionId);
         } else {
             // Unable to join Session
@@ -116,10 +116,10 @@ io.on('connection', (socket) => {
     });
 
     socket.on('getPacks', (sId) => {
-        console.log('on get pokemon packs')
+        //console.log('on get pokemon packs')
         let packs = [];
         let users = sessions[sId].GetUserNames();
-        console.log(users);
+        //console.log(users);
         for (let i = 0; i < 4; i++) {
             const packNumber = packOrder[i][sessions[sId].currentRound-1][sessions[sId].currentPick-1];
             packs.push({'user':users[i], 'pack':sessions[sId].GetPack(packNumber)});
@@ -129,7 +129,7 @@ io.on('connection', (socket) => {
 
     socket.on('getPack', (sId, uId) => {
         const userIndex = sessions[sId].GetUserIndex(uId);
-        console.log(userIndex);
+        //console.log(userIndex);
         if (userIndex >= 0) {
             const packNumber = packOrder[userIndex][sessions[sId].currentRound-1][sessions[sId].currentPick-1];
 
@@ -167,8 +167,8 @@ io.on('connection', (socket) => {
 
     socket.on('generatePasteUrl', async (paste) => {
         const Paste = paste;
-        console.log('Paste:');
-        console.log(paste);
+        //console.log('Paste:');
+        //console.log(paste);
         try {
             const response = await axios.post('https://pokepast.es/create', null, {
                 params: {
@@ -177,7 +177,7 @@ io.on('connection', (socket) => {
             });
     
             const pokePasteUrl = response.request.res.responseUrl;
-            console.log(pokePasteUrl);
+            //console.log(pokePasteUrl);
             //res.json({ url: pokePasteUrl }); // Send the response back to the client
             socket.emit('pasteUrl', pokePasteUrl);
         } catch (error) {
@@ -191,7 +191,7 @@ io.on('connection', (socket) => {
 // start a server
 // "0.0.0.0" <-production, blank for localhost
 server.listen(PORT, HOST, () => {
-    console.log(`Server is running on http://${HOST}:${PORT}`);
+    //console.log(`Server is running on http://${HOST}:${PORT}`);
 });
 
 function getErrorString(id) {

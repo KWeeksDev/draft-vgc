@@ -42,7 +42,7 @@
             }
 
             function getUsernames() {
-                console.log(`getting users in session ${sessionId}`);
+                //console.log(`getting users in session ${sessionId}`);
                 socket.emit('getUsers', sessionId);
             }
 
@@ -55,7 +55,7 @@
             }
 
             function getPacks() {
-                console.log("emitting getpacks ");
+                //console.log("emitting getpacks ");
                 socket.emit('getPacks', sessionId);
             }
 

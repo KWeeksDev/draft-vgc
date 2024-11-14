@@ -121,7 +121,7 @@
                     svgDoc.querySelector(`#nametag_${i+1}`).textContent = "";
                     svgDoc.querySelector(`#player_${i+1}`).style.display = "none";
                 }
-                console.log("getting user names");
+                //console.log("getting user names");
                 getUsernames();
                 updateRoundInfo("","");
                 
@@ -151,7 +151,7 @@
 
             socket.on('userNames', (ids) => {
                 var idx = ids.indexOf(userId);
-                console.log(idx);
+                //console.log(idx);
                 if (idx == 0) {
                     if (!loadedJson) {
                         loadJson('pool_test');
@@ -183,12 +183,12 @@
             })
 
             socket.on('pokemonPool', (pool) => {
-                console.log("pokemonPool");
+                //console.log("pokemonPool");
                 poolCopy = pool;
             })
 
             socket.on('pokemonPack', (pack) => {
-                console.log("pokemonPack");
+                //console.log("pokemonPack");
                 currentPack = pack;
                 getPacks();
             })
@@ -197,9 +197,9 @@
                 var idx = packs.findIndex((e) => e.user === userId);
                 if (idx >= 0) {          
                     for (let i = 0; i < 4; i++) {
-                        console.log(`${packs[idx].pack[0]}`);
-                        console.log(`${packs[idx].pack[1]}`);
-                        console.log(`${packs[idx].pack[2]}`);
+                        //console.log(`${packs[idx].pack[0]}`);
+                        //console.log(`${packs[idx].pack[1]}`);
+                        //console.log(`${packs[idx].pack[2]}`);
                         svgDoc.querySelector(`#ball_${i+1}_1`).style.display = packs[idx].pack[0] != null ? "inline" : "none";
                         svgDoc.querySelector(`#ball_${i+1}_2`).style.display = packs[idx].pack[1] != null ? "inline" : "none";
                         svgDoc.querySelector(`#ball_${i+1}_3`).style.display = packs[idx].pack[2] != null ? "inline" : "none";
@@ -227,7 +227,7 @@
             })
 
             socket.on('readyForNextPack', () => {
-                console.log("Ready for next pack");
+                //console.log("Ready for next pack");
                 document.getElementById("sessionStatus").innerText = "Select a Pokemon!";
                 getPack(userId);
 
@@ -257,7 +257,7 @@
                 document.getElementById(`pick${totalPicks}Icon`).alt = document.getElementById('sprite').alt;
                 updatePokemonVisuals();
                 totalPicks++;
-                console.log(`CurrentPick - lobby = ${currentPick}`);
+                //console.log(`CurrentPick - lobby = ${currentPick}`);
                 makePick(userId, currentPick);
                 selectButton.style.display = 'none';
             });
@@ -278,7 +278,7 @@
                             teamPaste += getFormattedPokemonStats(pkmn, false);
                         }
                         teamPaste += "\r\n\r\n";
-                    } else { console.log("pkmon not found");}
+                    } else { //console.log("pkmon not found");}
                 }
                 generatePasteUrl(teamPaste);
             });
