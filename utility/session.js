@@ -5,6 +5,7 @@ class Session {
         this.sessionId = sId;
         //users - dictionary of socket ids to users
         this.users = [{socketId:"", user:null},{socketId:"", user:null},{socketId:"", user:null},{socketId:"", user:null}];
+        this.usersInSession = 0;
         this.pool = [];
         //packs - all
         this.packs = [];
@@ -17,15 +18,13 @@ class Session {
     }
 
     AddUser(socket, uId) {
-        console.log("AddUser");
-        console.log(socket);
-        console.log(uId);
         let result = -1;
         for (let i = 0; i < 4; i++) {
             // If this spot is available add the player in
             if (this.users[i].socketId == "") {
                 this.users[i].socketId = socket;
                 this.users[i].user = new User(uId);
+                this.usersInSession++;
                 result = i;
                 break;
             }
@@ -39,7 +38,6 @@ class Session {
     }
 
     ContainsSocket(socket) {
-        console.log("Contains Socket");
         let result = false;
         for (let i = 0; i < this.users.length; i++) {
             if (this.users[i].socketId == socket) {
@@ -51,13 +49,12 @@ class Session {
     }
 
     RemoveUserBySocket(socket) {
-        console.log("RemoveBySocket");
         for (let i = 0; i < this.users.length; i++) {
             if (this.users[i].socketId == socket) {
                 this.users[i].socketId = "";
                 delete this.users[i].user;
                 this.users[i].user = null;
-                console.log("Removed User");
+                this.usersInSession--;
                 break;
             }
         }
@@ -94,7 +91,7 @@ class Session {
         this.users[idx].user.MakePick(pick);
         // If everyone has made a pick advance the round
         this.picksDone++;
-        if (this.picksDone >= this.users.length) {
+        if (this.picksDone >= this.usersInSession) {
             result = true;
         } 
         return result;

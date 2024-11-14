@@ -341,7 +341,7 @@
                 "tera": "Ghost",
                 "evs": "4 HP / 252 Atk / 252 Spe",
                 "nature":"Jolly",
-                "moves": ["Tailwind","Flare Blitz","Brave Bird","Will=O=Wisp"]
+                "moves": ["Tailwind","Flare Blitz","Brave Bird","Will-O-Wisp"]
             }
         },
         {
