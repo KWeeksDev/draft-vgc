@@ -41,6 +41,10 @@
                 });
             }
 
+            function setUsername(uId) {
+                userId = uId;
+            }
+
             function getUsernames() {
                 //console.log(`getting users in session ${sessionId}`);
                 socket.emit('getUsers', sessionId);

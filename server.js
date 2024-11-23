@@ -70,32 +70,52 @@ app.post('/join/:sessionId', (req,res) => {
 });
 
 io.on('connection', (socket) => {
-    //console.log('A user connected');
 
-    socket.on('joinSession', (sessionId, userId) => {
+    socket.on('joinSession', (sessionId) => {
         if (!sessions[sessionId]) {
             sessions[sessionId] = new Session(sessionId);
         }
+        if (sessions[sessionId].GetUserCount() < 4) {
+            socket.join(sessionId);
+            socket.emit('userJoined', sessionId, "");
+        } else {
+            socket.emit('joinFailed', `${getErrorString(-1)}`);
+        }
+    });
+
+    socket.on('selectUsername', (sessionId, userId) => {
         const idx = sessions[sessionId].AddUser(socket.id, userId);
         //console.log(`Idx = ${idx}`);
         if (idx >= 0) {
-            socket.join(sessionId);
-            //console.log(`User ${userId} joined session: ${sessionId}`);
-            io.to(sessionId).emit('userJoined', userId, sessionId);
+            socket.emit('nameSuccess', userId);
         } else {
             // Unable to join Session
-            socket.emit('joinFailed', `${getErrorString(idx)}`);
+            socket.emit('nameFailed', `${getErrorString(idx)}`);
         }
     });
 
     socket.on('disconnect', () => {
         for (const sId in sessions) {
             if (sessions[sId].ContainsSocket(socket.id)) {
-                sessions[sId].RemoveUserBySocket(socket.id);
-                io.to(sessions[sId].sessionId).emit('userNames', sessions[sId].GetUserNames());
+                let count = sessions[sId].RemoveUserBySocket(socket.id);
+                if (count > 0) {
+                    io.to(sessions[sId].sessionId).emit('userNames', sessions[sId].GetUserNames());
+                } else {
+                    //Clean up and remove the session from the list
+                    delete sessions[sId];
+                }
                 return;
             }
         }
+    });
+
+    socket.on('getSessions', () => {
+        let sessionData = [];
+        const sessionIds = Object.keys(sessions);
+        for (let i = 0; i < sessionIds.length; i++) {
+            sessionData.push({'name':sessions[sessionIds[i]].sessionId, 'count':sessions[sessionIds[i]].GetUserCount()});
+        }
+        socket.emit('sessionList', sessionData);
     });
 
     socket.on('getUsers', (sessionId) =>{

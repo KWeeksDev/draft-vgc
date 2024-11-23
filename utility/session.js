@@ -58,6 +58,7 @@ class Session {
                 break;
             }
         }
+        return this.usersInSession;
     }
 
     GetUserNames() {
@@ -83,6 +84,10 @@ class Session {
             }
         }
         return result;
+    }
+
+    GetUserCount() {
+        return this.usersInSession;
     }
 
     // Returns true if all players have made a pick

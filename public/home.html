@@ -4,35 +4,147 @@
         <link rel="stylesheet" href="home.css">
     </head>
     <body>
-        <h1>Welcome to Draft VGC</h1>
-        <h3>A MTG Booster stlye draft for Pokemon VGC</h3>
+        <image id="pokeLogo" src ="resources/Logo.svg" />
+        <h2 id="tagline">A MTG Booster stlye draft for Pokemon VGC</h2>
         <image id="pokeTable" src ="resources/Table.svg" />
-        <h2>Choose your UserName</h2>
-        <input id="userId" placeholder="Enter UserName"/>
-        <h2>Enter a Session to either join or create a new draft</h2>
-        <input id="sessionId" placeholder="Enter Session ID"/>
-        <button id="joinBtn">Join Session</button>
+        <image id="createSessionButton" class="pokeBtn"src="resources/CreateButton.svg"/>
+        <image id="joinSessionButton" class="pokeBtn" src="resources/JoinButton.svg"/>
+
+        <!-- Create Session Dialog -->
+        <dialog id="createSessionDialog">
+            <div class="dialog-content">
+                <label for="session">Draft Name:</label>
+                <input type="text" id="session" name="session" placeholder="Enter draft name">             
+            </div>
+            <div class="dialog-buttons">
+                <button id="cancelSessionButton">Cancel</button>
+                <button id="submitSessionButton">Create Draft</button>
+            </div>
+         </dialog>
+
+         <!-- Select Lobby Dialog -->
+        <dialog id="joinSessionDialog">
+            <div class="dialogContainer">
+                <header class="dialogHeader">
+                    <h1>Lobby Selection</h1>
+                    <input type="text" id="search" placeholder="Search Lobbies..." class="search-bar">
+                </header>
+                <div class="lobby-list">
+
+                </div>
+                <button id="cancelJoinBtn" class="cancel-lobby-btn">Cancel</button>
+            </div>
+        </dialog>
+
         <div id="message"></div>
 
         <script>
-            const socket = io();
+            const socket = io();         
+            // Lobby Selection
+            let lobbyList = {};
+            // Create Draft Dialog 
+            const createSessionButton = document.getElementById('createSessionButton');
+            const createDialog = document.getElementById('createSessionDialog');
+            const cancelSessionButton = document.getElementById('cancelSessionButton');
+            const submitSessionButton = document.getElementById('submitSessionButton');
 
-            document.getElementById('joinBtn').onclick = () => {
-                const userId = document.getElementById('userId').value;
-                const sessionId = document.getElementById('sessionId').value;
-                //console.log(sessionId);
-                socket.emit('joinSession', sessionId, userId);
+            // Joing Draft Dialog
+            const joinSessionButton = document.getElementById('joinSessionButton');
+            const joinDialog = document.getElementById('joinSessionDialog');
+            const cancelJoinBtn = document.getElementById('cancelJoinBtn');
+
+            createSessionButton.onclick = () => {
+                createDialog.showModal();
+            };
+
+            cancelSessionButton.onclick = () => {
+                createDialog.close();
+            };
+
+            cancelJoinBtn.onclick = () => {
+                joinDialog.close();
+            };
+
+            joinSessionButton.addEventListener('load', () => {
+                const searchInput = document.getElementById('search');
+                lobbyList = document.querySelector(`.lobby-list`);
+                // Filters lobbies by name
+                searchInput.addEventListener('input', function() {
+                    document.getElementById('message').innerText = `InputChanged`;
+                    const searchValue = searchInput.value.toLowerCase();
+                    const lobbies = document.querySelectorAll(`.lobby`);
+
+                    lobbies.forEach(lobby => {
+                        const lobbyName = lobby.querySelector(`.lobby-name`).textContent.toLowerCase();
+                        if (lobbyName.includes(searchValue)) {
+                            lobby.style.display = 'flex';
+                        } else {
+                            lobby.style.display = 'none';
+                        }
+                    });
+                });            
+            })
+
+            joinSessionButton.onclick = () => {
+                joinDialog.showModal();
+                socket.emit('getSessions');
+            };
+
+            submitSessionButton.onclick = () => {
+                const sessionId = document.getElementById('session').value;
+                createDialog.close();
+                socket.emit('joinSession', sessionId);
                 document.getElementById('message').innerText = `Joining session ${sessionId}...`;
             };
 
-            socket.on('userJoined', (userId, sessionId) => {
-                document.getElementById('message').innerText = `User ${userId} has joined the session ${sessionId}`;
+            socket.on('userJoined', (sessionId, userId) => {
+                //document.getElementById('message').innerText = `User ${userId} has joined the session ${sessionId}`;
                 loadContent('lobby', sessionId, userId);
             });
 
             socket.on('joinFailed', (error) => {
                 document.getElementById('message').innerText = `Uanble to Join Session : ${error}`;
             });
+
+            socket.on('sessionList', (sData) => {
+                //console.log("SessionList");
+                sData.forEach(e => {
+                    addLobby(e.name, e.count);
+                })
+            });
+
+            function addLobby(lobbyName, playerCount) {
+                // <div class="lobby" data-lobby-id="1">
+                //         <span class="lobby-name">Lobby 1</span>
+                //         <span class="lobby-size">1/4</span>
+                //         <button class="join-btn">Join</button>
+                //     </div>
+                const lobbyDiv = document.createElement('div');
+                lobbyDiv.classList.add('lobby');
+
+                const lobbyNameSpan = document.createElement('span');
+                lobbyNameSpan.classList.add('lobby-name');
+                lobbyNameSpan.textContent = lobbyName;
+
+                const lobbySizeSpan = document.createElement('span');
+                lobbySizeSpan.classList.add('lobby-size');
+                lobbySizeSpan.textContent = playerCount + '/4';
+
+                const joinButton = document.createElement('button');
+                joinButton.classList.add('join-btn');
+                joinButton.textContent = 'Join';
+
+                joinButton.addEventListener('click', (e) => {
+                    const lobbyName = e.target.closest('.lobby').querySelector('.lobby-name').textContent;
+                    socket.emit('joinSession', lobbyName);
+                });
+
+                lobbyDiv.appendChild(lobbyNameSpan);
+                lobbyDiv.appendChild(lobbySizeSpan);
+                lobbyDiv.appendChild(joinButton);
+                lobbyList.appendChild(lobbyDiv);
+
+            }
         </script>
     </body>
 </html>

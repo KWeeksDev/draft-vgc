@@ -9,6 +9,16 @@
 
             </div>
             <div class="column">
+                <!-- Create Session Dialog -->
+                <dialog id="selectUsernameDialog">
+                    <div class="dialog-content">
+                        <label for="user">User Name:</label>
+                        <input type="text" id="user" name="user" placeholder="Enter player name...">             
+                    </div>
+                    <div class="dialog-buttons">
+                        <button id="submitUserButton">Select Name</button>
+                    </div>
+                </dialog>
                 <h1 id=sessionName></h1>
                 <h2 id="sessionStatus">Waiting for Players</h2>              
                 
@@ -83,6 +93,30 @@
             let totalPicks = 1;
             let teamSelected = 0;
             let loadedJson = false;
+            let pickedThisRound = false;
+
+            // Create Username Dialog
+            const usernameDialog = document.getElementById('selectUsernameDialog');
+            const submitUserButton = document.getElementById('submitUserButton');
+
+            submitUserButton.onclick = () => {
+                const userId = document.getElementById('user').value;
+                socket.emit('selectUsername', sessionId, userId);
+            }
+
+            socket.on('nameFailed', (error) => {
+                document.getElementById('sessionStatus').innerText = 'Error: User Id already in use!';
+            });
+
+            socket.on('nameSuccess', (name) => {
+                setUsername(name)
+                getUsernames();
+                usernameDialog.close();
+            });
+            usernameDialog.showModal();
+
+
+
             // Update the session name so it can be shared
             document.getElementById('sessionName').innerText = "Draft Group: " + sessionId;
             // Setup team buttons
@@ -138,9 +172,11 @@
                             }
                             return response.json();
                         })
-                        .then(data => {                           
-                            updatePokemonVisuals(data)
-                            selectButton.style.display = 'inline';
+                        .then(data => {
+                            if (!pickedThisRound) {                           
+                                updatePokemonVisuals(data)
+                                selectButton.style.display = 'inline';
+                            }
                         })
                         .catch(error => {
                             document.getElementById('sessionStatus').innerText = 'Error: ' + error.message;
@@ -230,7 +266,7 @@
                 //console.log("Ready for next pack");
                 document.getElementById("sessionStatus").innerText = "Select a Pokemon!";
                 getPack(userId);
-
+                pickedThisRound = false;
             })
 
             socket.on('draftComplete', () => {
@@ -252,7 +288,8 @@
             });
 
             // Selects a pokemon. Once everyone has picked, auto advances.
-            selectPokemon.addEventListener('click', () => {                
+            selectPokemon.addEventListener('click', () => {
+                pickedThisRound = true;             
                 document.getElementById(`pick${totalPicks}Icon`).src = document.getElementById('sprite').src;
                 document.getElementById(`pick${totalPicks}Icon`).alt = document.getElementById('sprite').alt;
                 updatePokemonVisuals();
@@ -278,7 +315,9 @@
                             teamPaste += getFormattedPokemonStats(pkmn, false);
                         }
                         teamPaste += "\r\n\r\n";
-                    } else { //console.log("pkmon not found");}
+                    } else {
+                        console.log("pkmon not found");
+                    }
                 }
                 generatePasteUrl(teamPaste);
             });
