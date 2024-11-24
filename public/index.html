@@ -75,8 +75,8 @@
                 socket.emit('makePick', sessionId, userId, pick);
             }
 
-            function generatePasteUrl(paste) {
-                socket.emit('generatePasteUrl', paste);
+            function generatePasteUrl(paste, userId) {
+                socket.emit('generatePasteUrl', paste, sessionId, userId);
             }
 
             loadContent('home', "", "");

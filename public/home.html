@@ -4,44 +4,67 @@
         <link rel="stylesheet" href="home.css">
     </head>
     <body>
-        <image id="pokeLogo" src ="resources/Logo.svg" />
-        <h2 id="tagline">A MTG Booster stlye draft for Pokemon VGC</h2>
-        <image id="pokeTable" src ="resources/Table.svg" />
-        <image id="createSessionButton" class="pokeBtn"src="resources/CreateButton.svg"/>
-        <image id="joinSessionButton" class="pokeBtn" src="resources/JoinButton.svg"/>
-
-        <!-- Create Session Dialog -->
-        <dialog id="createSessionDialog">
-            <div class="dialog-content">
-                <label for="session">Draft Name:</label>
-                <input type="text" id="session" name="session" placeholder="Enter draft name">             
+        <div class="page">
+            <div class="column">
+            <div class="aboutText">
+                <h1>WELCOME</h1>
+                <span>Draft VGC is a casual format for Pokemon battling. Players will build a team of pokemon from a
+                    pool constructed in a MTG booster pack style draft.    
+                </span>
+                <span>All Stats, Moves, and Items are already set. </span>
+                <span>Once complete a Pokepaste is generated and player are ready to battle on PokemonShowdown.</span>
             </div>
-            <div class="dialog-buttons">
-                <button id="cancelSessionButton">Cancel</button>
-                <button id="submitSessionButton">Create Draft</button>
             </div>
-         </dialog>
+            <div class="column">
+                <image id="pokeLogo" src ="resources/Logo.svg" />
+                <h2 id="tagline">A MTG Booster stlye draft for Pokemon VGC</h2>
+                <image id="pokeTable" src ="resources/Table.svg" />
+                <image id="createSessionButton" class="pokeBtn"src="resources/CreateButton.svg"/>
+                <image id="joinSessionButton" class="pokeBtn" src="resources/JoinButton.svg"/>
 
-         <!-- Select Lobby Dialog -->
-        <dialog id="joinSessionDialog">
-            <div class="dialogContainer">
-                <header class="dialogHeader">
-                    <h1>Lobby Selection</h1>
-                    <input type="text" id="search" placeholder="Search Lobbies..." class="search-bar">
-                </header>
-                <div class="lobby-list">
+                <!-- Create Session Dialog -->
+                <dialog id="createSessionDialog">
+                    <div class="dialog-content">
+                        <label for="session">Draft Name:</label>
+                        <input type="text" id="session" name="session" placeholder="Enter draft name">             
+                    </div>
+                    <div class="dialog-buttons">
+                        <button id="cancelSessionButton">Cancel</button>
+                        <button id="submitSessionButton">Create Draft</button>
+                    </div>
+                </dialog>
 
-                </div>
-                <button id="cancelJoinBtn" class="cancel-lobby-btn">Cancel</button>
+                <!-- Select Lobby Dialog -->
+                <dialog id="joinSessionDialog">
+                    <div class="dialogContainer">
+                        <header class="dialogHeader">
+                            <h1>Lobby Selection</h1>
+                            <input type="text" id="search" placeholder="Search Lobbies..." class="search-bar">
+                        </header>
+                        <div class="lobby-list">
+
+                        </div>
+                        <button id="cancelJoinBtn" class="cancel-lobby-btn">Cancel</button>
+                    </div>
+                </dialog>
+
+                <div id="message"></div>
+                <footer>
+                    <p>This website is a fan-created project and is not affiliated with, endorsed by, or officially associated with The Pokémon Company, Nintendo, or Game Freak in any way.</p>
+                    <p>Pokémon is a trademark of The Pokémon Company, Nintendo, and Game Freak. All rights reserved.</p>
+                </footer>
             </div>
-        </dialog>
+            <div class="column">
 
-        <div id="message"></div>
+            </div>
+        </div>
+        
 
         <script>
             const socket = io();         
             // Lobby Selection
             let lobbyList = {};
+            const lobbyRef = [];
             // Create Draft Dialog 
             const createSessionButton = document.getElementById('createSessionButton');
             const createDialog = document.getElementById('createSessionDialog');
@@ -107,18 +130,26 @@
             });
 
             socket.on('sessionList', (sData) => {
-                //console.log("SessionList");
+                console.log("SessionList");
+                Object.keys(lobbyRef).forEach(key => {
+                    console.log(`Key: ${key}`);
+                    if (sData.find((e) => e.name == key) == undefined) {
+                        lobbyList.removeChild(lobbyRef[key]);
+                        delete lobbyRef[key];
+                    }
+                });
+                console.log(sData.length);
                 sData.forEach(e => {
-                    addLobby(e.name, e.count);
+                    console.log(`sData ${e.name}`);
+                    if (!lobbyRef[e.name]) {
+                        lobbyRef[e.name] = addLobby(e.name, e.count);
+                    } else {
+                        lobbyRef[e.name].firstChild.nextSibling.textContent = e.count + '/4';
+                    }
                 })
             });
 
             function addLobby(lobbyName, playerCount) {
-                // <div class="lobby" data-lobby-id="1">
-                //         <span class="lobby-name">Lobby 1</span>
-                //         <span class="lobby-size">1/4</span>
-                //         <button class="join-btn">Join</button>
-                //     </div>
                 const lobbyDiv = document.createElement('div');
                 lobbyDiv.classList.add('lobby');
 
@@ -142,8 +173,7 @@
                 lobbyDiv.appendChild(lobbyNameSpan);
                 lobbyDiv.appendChild(lobbySizeSpan);
                 lobbyDiv.appendChild(joinButton);
-                lobbyList.appendChild(lobbyDiv);
-
+                return lobbyList.appendChild(lobbyDiv);               
             }
         </script>
     </body>

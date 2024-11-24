@@ -1,10 +1,28 @@
 html, body {
     height: 100%;
     margin: 0%;
+
+}
+
+.page {
     display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+}
+
+.column {
+    flex: 1;
+    padding: 20px;
     justify-content: center;
     text-align: center;
 }
+
+.aboutText {
+    justify-content: left;
+    text-align: left;
+}
+
 #taglines {
     margin-left: 10%; 
 }

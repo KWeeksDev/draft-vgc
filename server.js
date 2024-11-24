@@ -88,6 +88,13 @@ io.on('connection', (socket) => {
         //console.log(`Idx = ${idx}`);
         if (idx >= 0) {
             socket.emit('nameSuccess', userId);
+            // Inform all connected of changes in case they're looking at the lobby list
+            let sessionData = [];
+            const sessionIds = Object.keys(sessions);
+            for (let i = 0; i < sessionIds.length; i++) {
+                sessionData.push({'name':sessions[sessionIds[i]].sessionId, 'count':sessions[sessionIds[i]].GetUserCount()});
+            }
+            socket.broadcast.emit('sessionList', sessionData);
         } else {
             // Unable to join Session
             socket.emit('nameFailed', `${getErrorString(idx)}`);
@@ -98,15 +105,27 @@ io.on('connection', (socket) => {
         for (const sId in sessions) {
             if (sessions[sId].ContainsSocket(socket.id)) {
                 let count = sessions[sId].RemoveUserBySocket(socket.id);
+                console.log(typeof(sessions));
                 if (count > 0) {
                     io.to(sessions[sId].sessionId).emit('userNames', sessions[sId].GetUserNames());
-                } else {
-                    //Clean up and remove the session from the list
-                    delete sessions[sId];
                 }
-                return;
+                break;
             }
         }
+
+        Object.keys(sessions).forEach(key => {
+            if (sessions[key].GetUserCount() <= 0) {
+                delete sessions[key];
+            }
+        });
+
+        // Inform all connected of changes in case they're looking at the lobby list
+        let sessionData = [];
+        const sessionIds = Object.keys(sessions);
+        for (let i = 0; i < sessionIds.length; i++) {
+            sessionData.push({'name':sessions[sessionIds[i]].sessionId, 'count':sessions[sessionIds[i]].GetUserCount()});
+        }
+        socket.broadcast.emit('sessionList', sessionData);
     });
 
     socket.on('getSessions', () => {
@@ -185,13 +204,15 @@ io.on('connection', (socket) => {
         }
     });
 
-    socket.on('generatePasteUrl', async (paste) => {
+    socket.on('generatePasteUrl', async (paste, sId, uId) => {
         const Paste = paste;
         //console.log('Paste:');
         //console.log(paste);
         try {
             const response = await axios.post('https://pokepast.es/create', null, {
                 params: {
+                    title: `${sId} Draft Team`,
+                    author: `${uId}`,
                     paste: Paste,
                 },
             });

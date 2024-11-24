@@ -6,7 +6,15 @@
     <body>
         <div class="page">
             <div class="column">
-
+                <div class="aboutText">
+                    <h2>How To Play:</h2>
+                    <p>This is a 3 Round 3 Pick draft.</p>
+                    <p>Once everyone is ready, begin the draft. You can review the 'packs' pokemon be selecting the pokeballs in front of you.</p>
+                    <p>You can review your previous choices below the draft window.</p>
+                    <p>After the draft is completed, select 6 pokemon from your pool and Click the generate button to get you pokepaste</p>
+                    <span>When you're down please leave us some feedback!</span>
+                </div>
+                <a href="https://forms.gle/scgKca6zCW5JdfQm8">Feedback</a>
             </div>
             <div class="column">
                 <!-- Create Session Dialog -->
@@ -123,17 +131,19 @@
             for (let i = 1; i < 10; i++ ) {
                 // Toggle Selected           
                 document.getElementById(`teammate${i}`).addEventListener('click', function() {
-                    let classList = document.getElementById(`teammate${i}`).classList;
-                    if (classList.contains('selected')) {
-                        classList.remove('selected');
-                        teamSelected--;
-                    } else {
-                        if (teamSelected < 6) {
-                            classList.add('selected');
-                            teamSelected++;
+                    if (draftComplete) {
+                        let classList = document.getElementById(`teammate${i}`).classList;
+                        if (classList.contains('selected')) {
+                            classList.remove('selected');
+                            teamSelected--;
+                        } else {
+                            if (teamSelected < 6) {
+                                classList.add('selected');
+                                teamSelected++;
+                            }
                         }
+                        generateTeamButton.style.display = teamSelected == 6 ? 'inline' : 'none';
                     }
-                    generateTeamButton.style.display = draftComplete && teamSelected == 6 ? 'inline' : 'none';
                 });
 
                 document.getElementById(`teammate${i}`).addEventListener('mouseover', function() {    
@@ -319,7 +329,7 @@
                         console.log("pkmon not found");
                     }
                 }
-                generatePasteUrl(teamPaste);
+                generatePasteUrl(teamPaste, userId);
             });
 
             function updatePokeballs() {
